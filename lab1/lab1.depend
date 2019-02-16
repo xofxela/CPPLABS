@@ -1,0 +1,30 @@
+# depslib dependency file v1.0
+1550047333 source:c:\users\admin\documents\codeblocks\lab1\main.cpp
+	"main.h"
+
+1550047262 c:\users\admin\documents\codeblocks\lab1\main.h
+	<iostream>
+	<fstream>
+	<string>
+	<stdint.h>
+
+1550253009 source:c:\users\aspod\desktop\codeblocks\lab1\main.cpp
+	"main.h"
+	"file.h"
+
+1550253304 c:\users\aspod\desktop\codeblocks\lab1\main.h
+	<iostream>
+	<fstream>
+	<string>
+	<stdint.h>
+	<stdlib.h>
+	<stdio.h>
+	<assert.h>
+	<array>
+
+1550251866 source:c:\users\aspod\desktop\codeblocks\lab1\file.cpp
+	"file.h"
+
+1550248340 c:\users\aspod\desktop\codeblocks\lab1\file.h
+	"main.h"
+
