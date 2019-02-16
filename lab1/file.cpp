@@ -4,8 +4,13 @@
 
 int writeFile( char* str )
 {
+    char path[] = "";
+    char fullPath[] = "D:\\";
+
+    std::cout << "Choose file to re-write in D root:\n" << std::endl;
+    std::cin >> path;
 	std::ofstream out;
-    out.open("C:\\file.txt");
+    out.open(strcat(fullPath , path));
     if (out.is_open())
     {
         out << str << std::endl;
@@ -16,10 +21,14 @@ int writeFile( char* str )
 
 int writeFileAdd( char* str )
 {
-    std::ofstream out("C:\\file.txt", std::ios::app);
+    char path[] = "";
+    char fullPath[] = "D:\\";
+    std::cout << "Choose file to write in D root:\n" << std::endl;
+    std::cin >> path;
+    std::ofstream out(strcat(fullPath , path), std::ios::app);
     if (out.is_open())
     {
-        out << str << std::endl;
+        out << ' ' << str;
     }
     out.close();
     return 0;
@@ -28,8 +37,19 @@ int writeFileAdd( char* str )
 int readFile( void )
 {
     std::string line;
-    std::ifstream in("C:\\file.txt");
-    if (in.is_open())
+    char path[] = "";
+    char fullPath[] = "D:\\";
+
+    std::cout << "Choose file to read in D root:\n" << std::endl;
+    std::cin >> path;
+
+    std::ifstream in(strcat(fullPath , path));
+    if (!in.is_open())
+    {
+        std::cout<<"Unable to read file: " << fullPath << std::endl;
+        return -1;
+    }
+    else
     {
         while (getline(in, line))
         {
@@ -38,15 +58,6 @@ int readFile( void )
     }
     in.close();
     return 0;
-}
-
-int compare( const void *arg1, const void *arg2 )
-{
-    int& a = *(int*)arg1;
-    int& b = *(int*)arg2;
-        if (a == b) return 0;
-        if (a > b) return 1;
-    return -1;
 }
 
 int fileSort(void)
@@ -54,53 +65,57 @@ int fileSort(void)
     std::string line;
 
     char path[] = "";
-    //char fullPath[] = "C:\\";
+    char fullPath[] = "D:\\";
 
-    std::cout << "Choose file:\n" << std::endl;
+    std::cout << "Choose file to sort in D root:\n" << std::endl;
     std::cin >> path;
 
-    //std::ifstream in(strcat(fullPath , path));
-    //printf("\tFile path set to: %s\n",fullPath);
-    std::ifstream in(path);
-    if (in.is_open())
+    std::ifstream in(strcat(fullPath , path));
+    printf("File path set to: %s\n",fullPath);
+//    std::ifstream in(path);
+    if (!in.is_open())
     {
-        //  Count num of strings in file
-        char *strInFile = new char [1024];
-        int numStr = 0;
+        std::cout << "Unable to read file: " << fullPath << std::endl;
+        return -1;
+    }
+    else
+    {
+        int intCounter = 0;
+        int *data = new int[stringLen];
+        for (int k=0;k<stringLen;k++) data[k]=0;
+
+        printf("Start to scanning for data from file\n");
         while (!in.eof())
         {
-            in.getline(strInFile, 1024, '\0');
-            numStr++;
+            printf("Data has been set, count of int: %d\n",intCounter);
+            in >> data[intCounter];
+            ++intCounter;
         }
-        delete[] strInFile;
+//        qsort (data, stringLen, sizeof(int), compare);
+        printf("Sort succeeded\n");
 
-        //  Init array
-        char **sortArray = new char*[numStr];
-        for (int i = 0; i < numStr; i++)
+        std::ofstream clear_file(fullPath, std::ios::out | std::ofstream::trunc);
+        clear_file.close();
+
+        std::ofstream out(fullPath, std::ios::app);
+        if (out.is_open())
         {
-          sortArray[i] = new char[1024];
+            for (int i = 0; i < intCounter; i++)
+            {
+                printf("Write to file, indx = %d\n", i);
+                out << data[i] << ' ';
+            }
         }
-
-        // Array sorting
-
-        qsort(sortArray, numStr, sizeof(char[1024]), compare);
-
-        // Delete array
-        for (int i = 0; i < numStr; i++)
-        {
-          delete[] sortArray[i];
-        }
-        delete[] sortArray;
-
-        // Print sorted array
-        while (getline(in, line))
-        {
-            std::cout << line << std::endl;
-        }
+        out.close();
+        delete[] data;
     }
     in.close();
     return 0;
 }
 
+int compare (const void * a, const void * b)
+{
+  return ( *(int*)a - *(int*)b );
+}
 
 /* END OF FILE */

@@ -4,22 +4,18 @@
 
 int main( int argc, char* argv[])
 {
-	char str4File[] = "Initial commit";
-    writeFile(str4File);
+//	char str4File[] = "Initial commit";
+//    writeFile(str4File);
+//
+//	char str4FileAdd[] = "Additional commit";
+//	writeFileAdd(str4FileAdd);
 
-	char str4FileAdd[] = "Additional commit";
-	writeFileAdd(str4FileAdd);
+//	char str4FileAdd[] = "1337";
+//	writeFileAdd(str4FileAdd);
 
-	std::cout<<"Write 5 numbers to file:"<<std::endl;
-	int arr[5];
-	for(int i=0; i<5; i++)
-        {
-            std::cin>>arr[i];
-            //writeFileAdd(std::to_string(arr[i]));
-        }
-
-	readFile();
+//	readFile();
 	fileSort();
+//	readFile();
     //if(/*assertion cause */)gError = false;
     //assert(gError);
 	return 0;
