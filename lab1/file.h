@@ -3,12 +3,9 @@
 
 #include "main.h"
 
-#define stringLen 100
-
 int writeFile( char* str );
 int writeFileAdd( char* str );
 int readFile( void );
-int compare (const void * a, const void * b);
-int fileSort(void);
-
+int fileSort( void );
+bool is_number(const std::string &s);
 #endif // FILE_H_

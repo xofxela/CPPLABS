@@ -28,23 +28,26 @@
 1550248340 c:\users\aspod\desktop\codeblocks\lab1\file.h
 	"main.h"
 
-1550337712 source:c:\users\admin\documents\codeblocks\cpplabs\lab1\file.cpp
+1550670896 source:c:\users\admin\documents\codeblocks\cpplabs\lab1\file.cpp
 	"file.h"
 
-1550334467 c:\users\admin\documents\codeblocks\cpplabs\lab1\file.h
+1550670103 c:\users\admin\documents\codeblocks\cpplabs\lab1\file.h
 	"main.h"
 
-1550320599 c:\users\admin\documents\codeblocks\cpplabs\lab1\main.h
+1550673446 c:\users\admin\documents\codeblocks\cpplabs\lab1\main.h
 	<iostream>
 	<fstream>
-	<string.h>
+	<sstream>
+	<vector>
+	<iterator>
+	<cstring>
+	<algorithm>
 	<stdint.h>
 	<stdlib.h>
 	<stdio.h>
 	<assert.h>
-	<array>
 
-1550336130 source:c:\users\admin\documents\codeblocks\cpplabs\lab1\main.cpp
+1550670674 source:c:\users\admin\documents\codeblocks\cpplabs\lab1\main.cpp
 	"main.h"
 	"file.h"
 

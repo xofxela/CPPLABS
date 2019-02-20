@@ -3,20 +3,24 @@
 
 #include <iostream>
 #include <fstream>
-#include <string.h>
+#include <sstream>
+#include <vector>
+#include <iterator>
+#include <cstring>
+#include <algorithm>
+
+
 #include <stdint.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <assert.h>
-#include <array>
 
-//#define NDEBUG
-//bool gError = true;
+//#define DEBUG
 
-extern int writeFile( char* str );
-extern int writeFileAdd( char* str );
-extern int readFile( void );
-extern int compare( const void *arg1, const void *arg2 );
-extern int fileSort(void);
+#ifdef DEBUG
+#define _printf(args ...) printf(args)
+#else
+#define _printf(...)
+#endif // DEBUG
 
 #endif // MAIN_H_

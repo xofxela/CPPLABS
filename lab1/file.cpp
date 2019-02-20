@@ -5,42 +5,53 @@
 int writeFile( char* str )
 {
     char path[] = "";
-    char fullPath[] = "D:\\";
+    char fullPath[500] = "D:\\";
 
-    std::cout << "Choose file to re-write in D root:\n" << std::endl;
+    std::cout << "Choose file to re-write:\n" << std::endl;
     std::cin >> path;
 	std::ofstream out;
     out.open(strcat(fullPath , path));
-    if (out.is_open())
+    if (!out.is_open())
+    {
+        std::cout<<"Unable to re-write file: " << fullPath << std::endl;
+        return -1;
+    }
+    else
     {
         out << str << std::endl;
     }
     out.close();
+    std::cout << "Re-write successful\n" << std::endl;
     return 0;
 }
 
 int writeFileAdd( char* str )
 {
     char path[] = "";
-    char fullPath[] = "D:\\";
-    std::cout << "Choose file to write in D root:\n" << std::endl;
+    char fullPath[500] = "D:\\";
+    std::cout << "Choose file to write:\n" << std::endl;
     std::cin >> path;
     std::ofstream out(strcat(fullPath , path), std::ios::app);
-    if (out.is_open())
+    if (!out.is_open())
     {
-        out << ' ' << str;
+        std::cout<<"Unable to write file: " << fullPath << std::endl;
+        return -1;
+    }
+    else
+    {
+        out << '\n' << str;
     }
     out.close();
+    std::cout << "Write successful\n" << std::endl;
     return 0;
 }
 
 int readFile( void )
 {
-    std::string line;
     char path[] = "";
-    char fullPath[] = "D:\\";
+    char fullPath[500] = "D:\\";
 
-    std::cout << "Choose file to read in D root:\n" << std::endl;
+    std::cout << "Choose file to read:\n" << std::endl;
     std::cin >> path;
 
     std::ifstream in(strcat(fullPath , path));
@@ -51,28 +62,29 @@ int readFile( void )
     }
     else
     {
+        std::string line;
         while (getline(in, line))
         {
             std::cout << line << std::endl;
         }
     }
     in.close();
+    std::cout << "Read successful\n" << std::endl;
     return 0;
 }
 
 int fileSort(void)
 {
-    std::string line;
+    char filePath[] = "";
+    char fullPath[500] = "D:\\";
 
-    char path[] = "";
-    char fullPath[] = "D:\\";
+    std::cout << "Choose file to sort:\n" << std::endl;
+    std::cin >> filePath;
 
-    std::cout << "Choose file to sort in D root:\n" << std::endl;
-    std::cin >> path;
+    std::strcat(fullPath, filePath);
+    std::ifstream in(fullPath, std::ios::in | std::ios::binary);
+    _printf("1 File path set to: %s\n", fullPath);
 
-    std::ifstream in(strcat(fullPath , path));
-    printf("File path set to: %s\n",fullPath);
-//    std::ifstream in(path);
     if (!in.is_open())
     {
         std::cout << "Unable to read file: " << fullPath << std::endl;
@@ -80,42 +92,55 @@ int fileSort(void)
     }
     else
     {
-        int intCounter = 0;
-        int *data = new int[stringLen];
-        for (int k=0;k<stringLen;k++) data[k]=0;
-
-        printf("Start to scanning for data from file\n");
-        while (!in.eof())
+        std::vector<int> numbers{};
+        std::string line{};
+        std::string number{};
+        while (std::getline(in, line))
         {
-            printf("Data has been set, count of int: %d\n",intCounter);
-            in >> data[intCounter];
-            ++intCounter;
-        }
-//        qsort (data, stringLen, sizeof(int), compare);
-        printf("Sort succeeded\n");
-
-        std::ofstream clear_file(fullPath, std::ios::out | std::ofstream::trunc);
-        clear_file.close();
-
-        std::ofstream out(fullPath, std::ios::app);
-        if (out.is_open())
-        {
-            for (int i = 0; i < intCounter; i++)
+            std::stringstream strStream(line);
+            while (std::getline(strStream, number, ' '))
             {
-                printf("Write to file, indx = %d\n", i);
-                out << data[i] << ' ';
+                if (!is_number(number.c_str()))
+                {
+                    std::cout << "File contains non-integer or signed data! " << std::endl;
+                    return -1;
+                }
+                numbers.push_back(atoi(number.c_str()));
             }
         }
+        std::cout << "Data to sort: ";
+        for (unsigned int i = 0; i < numbers.size(); i++) std::cout << numbers[i]<< ' ';
+        std::cout << std::endl;
+
+        std::sort(numbers.begin(), numbers.end());
+        _printf("2 File path set to: %s\n", fullPath);
+        std::ofstream clear_file(fullPath, std::ios::out | std::ofstream::trunc);
+        clear_file.close();
+        _printf("3 File path set to: %s\n", fullPath);
+        std::ofstream out(fullPath, std::ios::out | std::ios::binary | std::ios::app);
+        if (!out.is_open())
+        {
+            std::cout << "Unable to write file: " << fullPath << std::endl;
+            return -1;
+        }
+        else
+        {
+            for (unsigned int i = 0; i < numbers.size(); i++)
+            {
+                _printf("Write to file, indx = %d\n", i);
+                out << numbers[i] << ' ';
+            }
+//            std::copy(numbers.begin(), numbers.end(), std::ostream_iterator<int>(out));
+        }
+        out << std::endl;
         out.close();
-        delete[] data;
     }
     in.close();
     return 0;
 }
 
-int compare (const void * a, const void * b)
-{
-  return ( *(int*)a - *(int*)b );
+bool is_number(const std::string &s) {
+  return !s.empty() && std::all_of(s.begin(), s.end(), ::isdigit);
 }
 
 /* END OF FILE */
