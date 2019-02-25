@@ -1,15 +1,15 @@
-cmake_minimum_required (VERSION 2.6) 
+cmake_minimum_required (VERSION 2.6)
+
+set (PROJECT filesort)
  
-set (PROJECT hello_world) 
+project (${PROJECT} CXX C)
  
-project (${PROJECT}) 
- 
-set (HEADERS 
+set (HEADERS
 	file.h
 	main.h)
  
-set (SOURCES 
+set (SOURCES
 	file.cpp
-	main.cpp) 
+	main.cpp)
  
 add_executable (${PROJECT} ${HEADERS} ${SOURCES})
