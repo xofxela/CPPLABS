@@ -51,3 +51,23 @@
 	"main.h"
 	"file.h"
 
+1551105430 source:c:\users\aspod\desktop\codeblocks\cpplabs\lab1\main.cpp
+	"main.h"
+	"file.h"
+
+1551105430 c:\users\aspod\desktop\codeblocks\cpplabs\lab1\main.h
+	<iostream>
+	<fstream>
+	<sstream>
+	<vector>
+	<iterator>
+	<cstring>
+	<algorithm>
+	<stdint.h>
+	<stdlib.h>
+	<stdio.h>
+	<assert.h>
+
+1551105430 c:\users\aspod\desktop\codeblocks\cpplabs\lab1\file.h
+	"main.h"
+

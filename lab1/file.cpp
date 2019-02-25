@@ -5,7 +5,7 @@
 int writeFile( char* str )
 {
     char path[] = "";
-    char fullPath[500] = "D:\\";
+    char fullPath[500] = "C:\\";
 
     std::cout << "Choose file to re-write:\n" << std::endl;
     std::cin >> path;
@@ -28,7 +28,7 @@ int writeFile( char* str )
 int writeFileAdd( char* str )
 {
     char path[] = "";
-    char fullPath[500] = "D:\\";
+    char fullPath[500] = "C:\\";
     std::cout << "Choose file to write:\n" << std::endl;
     std::cin >> path;
     std::ofstream out(strcat(fullPath , path), std::ios::app);
@@ -49,7 +49,7 @@ int writeFileAdd( char* str )
 int readFile( void )
 {
     char path[] = "";
-    char fullPath[500] = "D:\\";
+    char fullPath[500] = "C:\\";
 
     std::cout << "Choose file to read:\n" << std::endl;
     std::cin >> path;
@@ -76,7 +76,7 @@ int readFile( void )
 int fileSort(void)
 {
     char filePath[] = "";
-    char fullPath[500] = "D:\\";
+    char fullPath[500] = "C:\\";
 
     std::cout << "Choose file to sort:\n" << std::endl;
     std::cin >> filePath;
