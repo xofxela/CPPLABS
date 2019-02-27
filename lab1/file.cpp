@@ -2,36 +2,15 @@
 
 #include "file.h"
 
-int writeFile( char* str )
+int write_str_to_file(const char* str)
 {
-    char path[] = "";
-    char fullPath[500] = "C:\\";
+    char fileName[] = "";
+    char fullPath[500] = "D:\\";
 
-    std::cout << "Choose file to re-write:\n" << std::endl;
-    std::cin >> path;
-	std::ofstream out;
-    out.open(strcat(fullPath , path));
-    if (!out.is_open())
-    {
-        std::cout<<"Unable to re-write file: " << fullPath << std::endl;
-        return -1;
-    }
-    else
-    {
-        out << str << std::endl;
-    }
-    out.close();
-    std::cout << "Re-write successful\n" << std::endl;
-    return 0;
-}
-
-int writeFileAdd( char* str )
-{
-    char path[] = "";
-    char fullPath[500] = "C:\\";
     std::cout << "Choose file to write:\n" << std::endl;
-    std::cin >> path;
-    std::ofstream out(strcat(fullPath , path), std::ios::app);
+    std::cin >> fileName;
+	std::ofstream out;
+    out.open(strcat(fullPath , fileName), std::ios::out | std::ios::binary | std::ios::app);
     if (!out.is_open())
     {
         std::cout<<"Unable to write file: " << fullPath << std::endl;
@@ -39,22 +18,18 @@ int writeFileAdd( char* str )
     }
     else
     {
-        out << '\n' << str;
+        out << str << std::endl;
     }
     out.close();
-    std::cout << "Write successful\n" << std::endl;
+    std::cout << "Write successful to " << fullPath << std::endl;
     return 0;
 }
 
-int readFile( void )
+int read_str_from_file(const char* fullPath)
 {
-    char path[] = "";
-    char fullPath[500] = "C:\\";
-
-    std::cout << "Choose file to read:\n" << std::endl;
-    std::cin >> path;
-
-    std::ifstream in(strcat(fullPath , path));
+    std::string line;
+	std::ifstream in;
+    in.open(fullPath);
     if (!in.is_open())
     {
         std::cout<<"Unable to read file: " << fullPath << std::endl;
@@ -62,37 +37,28 @@ int readFile( void )
     }
     else
     {
-        std::string line;
-        while (getline(in, line))
+        while(std::getline(in, line))
         {
             std::cout << line << std::endl;
         }
     }
     in.close();
-    std::cout << "Read successful\n" << std::endl;
+    std::cout << "Read successful from " << fullPath << std::endl;
     return 0;
 }
 
-int fileSort(void)
+std::vector<int> read_file_to_vector(char* fullPath)
 {
-    char filePath[] = "";
-    char fullPath[500] = "C:\\";
-
-    std::cout << "Choose file to sort:\n" << std::endl;
-    std::cin >> filePath;
-
-    std::strcat(fullPath, filePath);
-    std::ifstream in(fullPath, std::ios::in | std::ios::binary);
-    _printf("1 File path set to: %s\n", fullPath);
-
+    std::vector<int> numbers{};
+    std::ifstream in(fullPath);
     if (!in.is_open())
     {
-        std::cout << "Unable to read file: " << fullPath << std::endl;
-        return -1;
+        std::cout<<"Unable to read file: " << fullPath << std::endl;
+        assert(0);
     }
     else
     {
-        std::vector<int> numbers{};
+
         std::string line{};
         std::string number{};
         while (std::getline(in, line))
@@ -103,39 +69,66 @@ int fileSort(void)
                 if (!is_number(number.c_str()))
                 {
                     std::cout << "File contains non-integer or signed data! " << std::endl;
-                    return -1;
+                    assert(0);
                 }
                 numbers.push_back(atoi(number.c_str()));
             }
         }
-        std::cout << "Data to sort: ";
-        for (unsigned int i = 0; i < numbers.size(); i++) std::cout << numbers[i]<< ' ';
+        std::cout << "FILE DATA:" << std::endl;
+        for (unsigned int i = 0; i < numbers.size(); i++) std::cout << numbers[i] << ' ';
         std::cout << std::endl;
-
-        std::sort(numbers.begin(), numbers.end());
-        _printf("2 File path set to: %s\n", fullPath);
-        std::ofstream clear_file(fullPath, std::ios::out | std::ofstream::trunc);
-        clear_file.close();
-        _printf("3 File path set to: %s\n", fullPath);
-        std::ofstream out(fullPath, std::ios::out | std::ios::binary | std::ios::app);
-        if (!out.is_open())
-        {
-            std::cout << "Unable to write file: " << fullPath << std::endl;
-            return -1;
-        }
-        else
-        {
-            for (unsigned int i = 0; i < numbers.size(); i++)
-            {
-                _printf("Write to file, indx = %d\n", i);
-                out << numbers[i] << ' ';
-            }
-//            std::copy(numbers.begin(), numbers.end(), std::ostream_iterator<int>(out));
-        }
-        out << std::endl;
-        out.close();
     }
     in.close();
+    std::cout << "Read file successful from " << fullPath << std::endl;
+    return numbers;
+}
+
+int sort_file(const char* fullPath, std::vector<int>& numbers)
+{
+    std::ifstream in(fullPath, std::ios::in | std::ios::binary);
+    if (!in.is_open())
+    {
+        std::cout << "Unable to read file: " << fullPath << std::endl;
+        return -1;
+    }
+    else
+    {
+        std::sort(numbers.begin(), numbers.end());
+    }
+    in.close();
+    std::cout << "Sort file successful" << std::endl;
+    return 0;
+}
+
+int write_sorted_file(const char* fullPath, std::vector<int>& numbers)
+{
+    std::ofstream clear_file(fullPath, std::ios::out | std::ofstream::trunc);
+    if (!clear_file.is_open())
+    {
+        std::cout<<"Unable to flush file: " << fullPath << std::endl;
+        return -1;
+    }
+    else
+    {
+        clear_file.close();
+    }
+    std::ofstream out(fullPath, std::ios::out | std::ios::binary | std::ios::app);
+    if (!out.is_open())
+    {
+        std::cout << "Unable to write file: " << fullPath << std::endl;
+        return -1;
+    }
+    else
+    {
+        for (unsigned int i = 0; i < numbers.size(); i++)
+        {
+            out << numbers[i] << ' ';
+        }
+    //            std::copy(numbers.begin(), numbers.end(), std::ostream_iterator<int>(out));
+    }
+    out << std::endl;
+    out.close();
+    std::cout << "Write sorted file successful to " << fullPath << std::endl;
     return 0;
 }
 
