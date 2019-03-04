@@ -2,15 +2,10 @@
 
 #include "file.h"
 
-int write_str_to_file(const char* str)
+int write_str_to_file(const char* fullPath, const char* str)
 {
-    char fileName[] = "";
-    char fullPath[500] = "D:\\";
-
-    std::cout << "Choose file to write:\n" << std::endl;
-    std::cin >> fileName;
 	std::ofstream out;
-    out.open(strcat(fullPath , fileName), std::ios::out | std::ios::binary | std::ios::app);
+    out.open(fullPath, std::ios::out | std::ios::binary | std::ios::app);
     if (!out.is_open())
     {
         std::cout<<"Unable to write file: " << fullPath << std::endl;
@@ -47,7 +42,7 @@ int read_str_from_file(const char* fullPath)
     return 0;
 }
 
-std::vector<int> read_file_to_vector(char* fullPath)
+std::vector<int> read_file_to_vector(const char* fullPath)
 {
     std::vector<int> numbers{};
     std::ifstream in(fullPath);
@@ -83,21 +78,10 @@ std::vector<int> read_file_to_vector(char* fullPath)
     return numbers;
 }
 
-int sort_file(const char* fullPath, std::vector<int>& numbers)
+void sort_file(std::vector<int>& numbers)
 {
-    std::ifstream in(fullPath, std::ios::in | std::ios::binary);
-    if (!in.is_open())
-    {
-        std::cout << "Unable to read file: " << fullPath << std::endl;
-        return -1;
-    }
-    else
-    {
-        std::sort(numbers.begin(), numbers.end());
-    }
-    in.close();
+    std::sort(numbers.begin(), numbers.end());
     std::cout << "Sort file successful" << std::endl;
-    return 0;
 }
 
 int write_sorted_file(const char* fullPath, std::vector<int>& numbers)

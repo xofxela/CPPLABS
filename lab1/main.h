@@ -8,7 +8,7 @@
 #include <iterator>
 #include <cstring>
 #include <algorithm>
-
+#include <cstdio>
 
 #include <stdint.h>
 #include <stdlib.h>

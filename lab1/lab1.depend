@@ -76,3 +76,27 @@
 	"main.h"
 	"file.h"
 
+1551710729 source:c:\users\aspod\desktop\codeblocks\new\cpplabs\lab1\file.cpp
+	"file.h"
+
+1551710488 c:\users\aspod\desktop\codeblocks\new\cpplabs\lab1\file.h
+	"main.h"
+
+1551711177 c:\users\aspod\desktop\codeblocks\new\cpplabs\lab1\main.h
+	<iostream>
+	<fstream>
+	<sstream>
+	<vector>
+	<iterator>
+	<cstring>
+	<algorithm>
+	<cstdio>
+	<stdint.h>
+	<stdlib.h>
+	<stdio.h>
+	<assert.h>
+
+1551711633 source:c:\users\aspod\desktop\codeblocks\new\cpplabs\lab1\main.cpp
+	"main.h"
+	"file.h"
+
