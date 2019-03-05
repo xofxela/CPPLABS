@@ -12,4 +12,6 @@ set (SOURCES
 	file.cpp
 	main.cpp)
 
+add_subdirectory(libs)
+
 add_executable (${PROJECT} ${HEADERS} ${SOURCES})
