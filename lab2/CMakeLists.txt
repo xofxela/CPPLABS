@@ -1,19 +1,9 @@
-cmake_minimum_required(VERSION 2.6)
- 
-project(filesort CXX C)
-
+cmake_minimum_required(VERSION 2.8.2)
+project(test CXX C)
 set(CMAKE_CXX_STANDARD 11)
-
-set(SOURCE_EXE main.cpp)
-
-#link_directories(libs)
-	
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+add_definitions(-Dgtest_disable_pthreads=ON)
 include_directories(libs)
-
 add_subdirectory(libs)
-
-add_executable(filesort ${SOURCE_EXE})
-
-target_link_libraries(filesort PUBLIC file)
-
-target_link_libraries(filesort PUBLIC sort)
+add_subdirectory(test)
+add_subdirectory(googletest-master)

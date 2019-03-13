@@ -2,6 +2,8 @@
 #include "sort.h"
 #include "gtest/gtest.h"
 
+#define GTEST_OS_WINDOWS 1
+
 namespace {
     TEST(SortTest, Order)
     {

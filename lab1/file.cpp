@@ -108,7 +108,6 @@ int write_sorted_file(const char* fullPath, std::vector<int>& numbers)
         {
             out << numbers[i] << ' ';
         }
-    //            std::copy(numbers.begin(), numbers.end(), std::ostream_iterator<int>(out));
     }
     out << std::endl;
     out.close();

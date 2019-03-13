@@ -1,17 +1,8 @@
-cmake_minimum_required (VERSION 2.6)
-
-set (PROJECT filesort)
- 
-project (${PROJECT} CXX C)
- 
-set (HEADERS
-	file.h
-	main.h)
- 
-set (SOURCES
-	file.cpp
-	main.cpp)
-
-add_subdirectory(libs)
-
-add_executable (${PROJECT} ${HEADERS} ${SOURCES})
+cmake_minimum_required (VERSION 2.8.2)
+project (filesort CXX C)
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+add_definitions(-Dgtest_disable_pthreads=ON)
+add_subdirectory(googletest-master)
+add_executable(filesort test_main.cpp)
+target_link_libraries(filesort gtest)

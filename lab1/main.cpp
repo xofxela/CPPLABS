@@ -5,14 +5,14 @@
 
 int main(int argc, char* argv[])
 {
-    char fullPath2File[100] = "C:\\file.txt";
+    char fullPath2File[100] = "D:\\file.txt";
 
 	const char stringWriteToFile[] = "Initial commit";
     write_str_to_file(fullPath2File, stringWriteToFile);
     read_str_from_file(fullPath2File);
 
 	char fileName[] = "";
-    char fullPath[500] = "C:\\";
+    char fullPath[500] = "D:\\";
 
     std::cout << "Choose file name to read, sort and write:\n" << std::endl;
     std::cin >> fileName;

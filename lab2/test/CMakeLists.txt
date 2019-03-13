@@ -1,18 +1,8 @@
-cmake_minimum_required(VERSION 2.6)
-
-project(test CXX C)
-
+cmake_minimum_required(VERSION 2.8.2)
+project(testexec CXX C)
 set(CMAKE_CXX_STANDARD 11)
-
-set(SOURCE_EXE test_main.cpp)
-	
-include_directories(
-libs
-${GTEST_INCLUDE_DIRS}
-)
-
-add_executable(test ${SOURCE_EXE})
-
-target_link_libraries(test ${GTEST_LIBRARIES} sort)
-
-enable_testing()
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+add_definitions(-Dgtest_disable_pthreads=ON)
+add_executable(testexec test_main.cpp)
+target_link_libraries(testexec sort)
+target_link_libraries(testexec gtest)
