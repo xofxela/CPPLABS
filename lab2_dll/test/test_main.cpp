@@ -3,10 +3,10 @@
 #include "gtest/gtest.h"
 
 typedef void(*DllFunc)(std::vector<int>&);
-DllFunc pDllFunc = NULL;
+DllFunc pDllFunc = nullptr;
 
 namespace {
-    TEST(SortTest, Order)
+    TEST(SortTest, BackOrder)
     {
         std::vector<int> numbers = {5, 4, 3, 2, 1};
         std::vector<int> numbersSorted = {1, 2, 3, 4, 5};
@@ -14,51 +14,53 @@ namespace {
 
         EXPECT_EQ(numbersSorted, numbers);
     }
-	TEST(SortTest, EqualElement)
+	TEST(SortTest, AlreadySorted)
 	{
-		std::vector<int> numbers = { 5, 4, 3, 2, 1 };
+		std::vector<int> numbers = {1, 2, 3, 4, 5};
+		std::vector<int> numbersSorted = {1, 2, 3, 4, 5};
 		pDllFunc(numbers);
 
-		EXPECT_EQ(numbers[1], 2);
+		EXPECT_EQ(numbersSorted, numbers);
 	}
-    TEST(SortTest, GreaterValue)
+    TEST(SortTest, RandomOrder)
     {
-        std::vector<int> numbers = {5, 4, 3, 2, 1};
+        std::vector<int> numbers = {1, 3, 2, 5, 4};
+		std::vector<int> numbersSorted = {1, 2, 3, 4, 5};
 		pDllFunc(numbers);
 
-        EXPECT_GE(numbers[1], numbers[0]);
+		EXPECT_EQ(numbersSorted, numbers);
     }
-    TEST(SortTest, LessValue)
+    TEST(SortTest, OneSequence)
     {
-        std::vector<int> numbers = {5, 4, 3, 2, 1};
+        std::vector<int> numbers = {1, -1, -1, 1, 1};
+		std::vector<int> numbersSorted = {-1, -1, 1, 1, 1};
 		pDllFunc(numbers);
 
-        EXPECT_LT(numbers[0], numbers[1]);
+		EXPECT_EQ(numbersSorted, numbers);
     }
-    TEST(SortTest, IsExists)
+    TEST(SortTest, EmptyVector)
     {
-        std::vector<int> numbers = {5, 4, 3, 2, 1};
+        std::vector<int> numbers = {};
+		std::vector<int> numbersSorted = {};
 		pDllFunc(numbers);
-        for(unsigned int i=0; i<numbers.size(); i++)
-        {
-            EXPECT_TRUE(&numbers[i] != NULL);
-        }
+
+		EXPECT_EQ(numbersSorted, numbers);
     }
 }  // namespace
 
 GTEST_API_ int main(int argc, char **argv)
 {
-	HINSTANCE h = LoadLibrary("..\\libs\\Debug\\sort.dll");
+	HINSTANCE h = LoadLibrary("..\\libs\\Release\\sort.dll");
 	if (!h) 
 	{
 		printf("Error - can`t find sort.dll\n");
 		return -1;
 	}
-	DllFunc pDllFunc = (DllFunc) GetProcAddress(h, "sort_file");
+	pDllFunc = (DllFunc) GetProcAddress(h, "mergeSort");
 
 	if (!pDllFunc) 
 	{
-		printf("Error - No function sort_file() in sort.dll\n");
+		printf("Error - No function mergeSort() in sort.dll\n");
 		return -1;
 	}
 
@@ -69,5 +71,3 @@ GTEST_API_ int main(int argc, char **argv)
 	FreeLibrary(h);
 	return 0;
 }
-
-
