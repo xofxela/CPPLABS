@@ -50,7 +50,11 @@ namespace {
 
 GTEST_API_ int main(int argc, char **argv)
 {
+#if NDEBUG
 	HINSTANCE h = LoadLibrary("..\\libs\\Release\\sort.dll");
+#else
+	HINSTANCE h = LoadLibrary("..\\libs\\Debug\\sort.dll");
+#endif
 	if (!h) 
 	{
 		printf("Error - can`t find sort.dll\n");
