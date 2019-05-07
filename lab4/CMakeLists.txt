@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 2.8.2) 
+project(HammingEncoder CXX C)		
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+add_subdirectory(googletest-master)
+add_subdirectory(lib)				
+add_subdirectory(test)
