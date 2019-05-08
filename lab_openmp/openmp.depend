@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1557321875 source:c:\users\aspod\desktop\codeblocks\openmp\openmp.cpp
+	<stdio.h>
+	<omp.h>
+	<cstdint>
+	<time.h>
+	<malloc.h>
+	<cinttypes>
+
