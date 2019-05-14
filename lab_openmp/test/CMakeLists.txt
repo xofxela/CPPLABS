@@ -1,0 +1,8 @@
+cmake_minimum_required(VERSION 2.8.2) 
+project(test CXX C)
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)			
+set(SOURCE_EXE test.cpp)			
+add_executable(test test.cpp)	
+target_link_libraries(test libopenmp)	
+target_link_libraries(test gtest)

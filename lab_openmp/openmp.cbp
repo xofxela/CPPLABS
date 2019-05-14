@@ -37,6 +37,7 @@
 		<Unit filename="libthread/mingw.shared_mutex.h" />
 		<Unit filename="libthread/mingw.thread.h" />
 		<Unit filename="openmp.cpp" />
+		<Unit filename="openmp.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

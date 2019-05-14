@@ -1,31 +1,6 @@
-#include <stdio.h>
-#include <omp.h>
-#include <cstdint>
-#include <time.h>
-#include <malloc.h>
-#include <cinttypes>
+#include "openmp.h"
 
-//std::thread -std=c++11 standard support for MinGW
-#include "libthread\mingw.thread.h"
-
-// parallel_for.cpp
-// compilation: g++ -O3 -std=c++0x parallel_for.cpp -o parallel_for -lpthread
-// execution: time ./parallel_for 100 50000000
-// (100: number of threads, 50000000: vector size)
-#include <iostream>
-#include <iomanip>
-#include <cstdlib>
-#include <vector>
-#include <thread>
-#include <cmath>
-#include <algorithm>
-#include <numeric>
-#include <utility>
-
-//Show items per thread split macro
-//define THREAD_SPLIT
-
-double wtime ( )
+double wtime (void)
 {
   double value;
 
@@ -47,7 +22,7 @@ void matrix_vector_product(double *a, double *b, double *c, int m, int n)
             c[i] += a[i * n + j] * b[j];
 		}
 	}
-}void run_serial(const int m, const int n)
+}double run_serial(const int m, const int n)
 {
 	double *a, *b, *c;
 	a = (double*)malloc(sizeof(*a) * m * n);
@@ -67,10 +42,11 @@ void matrix_vector_product(double *a, double *b, double *c, int m, int n)
 	double t = wtime();
 	matrix_vector_product(a, b, c, m, n);
 	t = wtime() - t;
-	printf("Elapsed time (serial): %.6f sec.\n", t);
 	free(a);
 	free(b);
 	free(c);
+
+	return t;
 }
 
 /* matrix_vector_product_omp: Compute matrix-vector product c[m] = a[m][n] * b[n] */
@@ -103,7 +79,7 @@ void matrix_vector_product_omp(double *a, double *b, double *c, int m, int n)
 	}
 }
 
-void run_parallel(const int m, const int n)
+double run_parallel(const int m, const int n)
 {
 	double *a, *b, *c;
 	// Allocate memory for 2-d array a[m, n]
@@ -124,10 +100,11 @@ void run_parallel(const int m, const int n)
 	double t = wtime();
 	matrix_vector_product_omp(a, b, c, m, n);
 	t = wtime() - t;
-	printf("Elapsed time (parallel): %.6f sec.\n", t);
 	free(a);
 	free(b);
 	free(c);
+
+	return t;
 }
 
 // Function to apply
@@ -154,7 +131,7 @@ void parallel_for(const Iterator& first, const Iterator& last, Function&& f, con
     std::for_each(threads.begin(), threads.end(), [](std::thread& x){x.join();});
 }
 
-void run_parallel_for(const unsigned int nthreads, const unsigned int len)
+BenchmarkInfo_t run_parallel_for(const unsigned int nthreads, const unsigned int len)
 {
     double x = 0;
     std::vector<double> v(len);
@@ -164,11 +141,11 @@ void run_parallel_for(const unsigned int nthreads, const unsigned int len)
     parallel_for(v.begin(), v.end(), f<double>, nthreads);
 	for (unsigned int i = 0; i < len; ++i) x += v[i];
 	t = wtime() - t;
-	printf("Elapsed time (parallel for): %.6f sec.\n", t);
-    std::cout<<std::setprecision(15)<<"Parallel for sum: "<<x<<std::endl;
+	BenchmarkInfo_t out = {x, t};
+    return out;
 }
 
-void run_serial_for(const unsigned int len)
+BenchmarkInfo_t run_serial_for(const unsigned int len)
 {
     double x = 0;
     std::vector<double> v(len);
@@ -178,8 +155,8 @@ void run_serial_for(const unsigned int len)
     std::for_each(v.begin(), v.end(), f<double>);
 	for (unsigned int i = 0; i < len; ++i) x += v[i];
 	t = wtime() - t;
-	printf("Elapsed time (serial for): %.6f sec.\n", t);
-    std::cout<<std::setprecision(15)<<"Serial for sum: "<<x<<std::endl;
+    BenchmarkInfo_t out = {x, t};
+    return out;
 }
 
 int main(int argc, char **argv)
@@ -188,8 +165,10 @@ int main(int argc, char **argv)
     int m = 10000, n = 10000; // Matrix dimension
 	printf("Matrix-vector product benchmark. c[m] = a[m, n] * b[n]; m = %d, n = %d\n", m, n);
 	printf("--------------------\n");
-	run_serial(m,n);
-	run_parallel(m,n);
+	double tser = run_serial(m,n);
+	printf("Elapsed time (serial): %.6f sec.\n", tser);
+	double tpar = run_parallel(m,n);
+	printf("Elapsed time (parallel): %.6f sec.\n", tpar);
 	printf("--------------------\n");
 
     /* std::thread benchmark*/
@@ -197,8 +176,16 @@ int main(int argc, char **argv)
     const unsigned int len = 100000;
     printf("For cycle benchmark. %d-element vector, %d threads\n", len, nthreads);
     printf("--------------------\n");
-    run_serial_for(len);
-    run_parallel_for(nthreads, len);
+
+    BenchmarkInfo_t infoSerial = run_serial_for(len);
+    printf("Elapsed time (serial for): %.6f sec.\n", infoSerial.t);
+
+    BenchmarkInfo_t infoParallel = run_parallel_for(nthreads, len);
+    printf("Elapsed time (parallel for): %.6f sec.\n", infoParallel.t);
+
+    std::cout<<std::setprecision(15)<<"Serial for sum: "<<infoSerial.x<<std::endl;
+    std::cout<<std::setprecision(15)<<"Parallel for sum: "<<infoParallel.x<<std::endl;
+
     printf("--------------------\n");
     return 0;
 }
