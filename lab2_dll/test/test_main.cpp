@@ -24,7 +24,7 @@ namespace {
 	}
     TEST(SortTest, RandomOrder)
     {
-        std::vector<int> numbers = {1, 3, 2, 5, 4};
+        std::vector<int> numbers = {5, 2, 3, 1, 4};
 		std::vector<int> numbersSorted = {1, 2, 3, 4, 5};
 		pDllFunc(numbers);
 
@@ -60,11 +60,11 @@ GTEST_API_ int main(int argc, char **argv)
 		printf("Error - can`t find sort.dll\n");
 		return -1;
 	}
-	pDllFunc = (DllFunc) GetProcAddress(h, "mergeSort");
+	pDllFunc = (DllFunc) GetProcAddress(h, "selectionSort");
 
 	if (!pDllFunc) 
 	{
-		printf("Error - No function mergeSort() in sort.dll\n");
+		printf("Error - No function selectionSort() in sort.dll\n");
 		return -1;
 	}
 
