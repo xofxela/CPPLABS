@@ -13,8 +13,8 @@ namespace {
 
 	TEST(TestEncodeHamming, InpDataZeroPaddingTest)
 	{
-		std::vector<uint8_t> inpData{1,1,0,0,1};
-		std::vector<uint8_t> inpPaddedData{1,1,0,0,1,0,0,0};
+		std::vector<uint8_t> inpData{1,1,0};
+		std::vector<uint8_t> inpPaddedData{1,1,0,0};
 
 		EncodeHamming hamming_encode;
 		hamming_encode.encode(inpData);
@@ -24,7 +24,7 @@ namespace {
 	TEST(TestEncodeHamming, EncodingTest)
 	{
 		std::vector<uint8_t> inp{1,0,1,0};
-		std::vector<uint8_t> out{1,0,1,1,0,1,0};
+		std::vector<uint8_t> out{1,0,1,0,0,0,1};
 		EncodeHamming hamming_encode;
 		std::vector<uint8_t> encodedData = hamming_encode.encode(inp);
 		ASSERT_EQ(encodedData, out);
