@@ -8,10 +8,10 @@ std::vector<uint8_t> EncodeHamming::encode(std::vector<uint8_t> &inpData)
 	int redundancyBits = ((inpData.size() / 4) * 3);
 	std::vector<uint8_t> output_data(inpData.size() + redundancyBits);
 
-
+	int j = 0;
 	for (int i = 0; i < output_data.size(); i += outDataBits)
 	{
-		for (int j = 0; j < inpData.size(); j++)
+		for (j; j < inpData.size(); j++)
 		{
 			output_data.at(i) = inpData.at(j);
 			output_data.at(i + 1) = inpData.at(j + 1);
@@ -41,10 +41,9 @@ void EncodeHamming::validate_inp_data(std::vector<uint8_t> &inpData)
 
 void EncodeHamming::zero_padding(std::vector<uint8_t> &inpData)
 {
-	uint8_t flag = inpData.size() % inpDataBits;
-	if (flag != 0)
+	if (std::fmod(inpData.size(), inpDataBits) != 0)
 	{
-		for (int i = 0; i < flag; i++)
+		for (int i = 0; i < std::fmod(inpData.size(), inpDataBits); i++)
 		{
 			inpData.push_back(0);
 		}
