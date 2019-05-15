@@ -9,11 +9,6 @@
 
 extern "C" 
 {
-	__declspec(dllexport) void mergeSort(std::vector<int> &array);
-	__declspec(dllexport) void merge(
-		std::vector<int> &array,
-		std::vector<int> &L,
-		std::vector<int> &R
-	);
+	__declspec(dllexport) void selectionSort(std::vector<int> &vec);
 }
 #endif // SORT_H_
