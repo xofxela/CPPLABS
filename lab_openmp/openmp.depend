@@ -1,0 +1,47 @@
+# depslib dependency file v1.0
+1557321875 source:c:\users\aspod\desktop\codeblocks\openmp\openmp.cpp
+	<stdio.h>
+	<omp.h>
+	<cstdint>
+	<time.h>
+	<malloc.h>
+	<cinttypes>
+
+1557841151 source:c:\users\aspod\desktop\cpplabs\lab_openmp\openmp.cpp
+	"openmp.h"
+
+1557842517 c:\users\aspod\desktop\cpplabs\lab_openmp\openmp.h
+	<stdio.h>
+	<omp.h>
+	<cstdint>
+	<time.h>
+	<malloc.h>
+	<cinttypes>
+	"libthread\mingw.thread.h"
+	<iostream>
+	<iomanip>
+	<cstdlib>
+	<vector>
+	<thread>
+	<cmath>
+	<algorithm>
+	<numeric>
+	<utility>
+
+1557749874 c:\users\aspod\desktop\cpplabs\lab_openmp\libthread\mingw.thread.h
+	<thread>
+	<cstddef>
+	<cerrno>
+	<exception>
+	<system_error>
+	<functional>
+	<tuple>
+	<chrono>
+	<memory>
+	<ostream>
+	<utility>
+	<type_traits>
+	<windows.h>
+	<process.h>
+	<cstdio>
+

@@ -1,0 +1,102 @@
+# depslib dependency file v1.0
+1550047333 source:c:\users\admin\documents\codeblocks\lab1\main.cpp
+	"main.h"
+
+1550047262 c:\users\admin\documents\codeblocks\lab1\main.h
+	<iostream>
+	<fstream>
+	<string>
+	<stdint.h>
+
+1550253009 source:c:\users\aspod\desktop\codeblocks\lab1\main.cpp
+	"main.h"
+	"file.h"
+
+1550253304 c:\users\aspod\desktop\codeblocks\lab1\main.h
+	<iostream>
+	<fstream>
+	<string>
+	<stdint.h>
+	<stdlib.h>
+	<stdio.h>
+	<assert.h>
+	<array>
+
+1550251866 source:c:\users\aspod\desktop\codeblocks\lab1\file.cpp
+	"file.h"
+
+1550248340 c:\users\aspod\desktop\codeblocks\lab1\file.h
+	"main.h"
+
+1551255696 source:c:\users\admin\documents\codeblocks\cpplabs\lab1\file.cpp
+	"file.h"
+
+1551255787 c:\users\admin\documents\codeblocks\cpplabs\lab1\file.h
+	"main.h"
+
+1550673446 c:\users\admin\documents\codeblocks\cpplabs\lab1\main.h
+	<iostream>
+	<fstream>
+	<sstream>
+	<vector>
+	<iterator>
+	<cstring>
+	<algorithm>
+	<stdint.h>
+	<stdlib.h>
+	<stdio.h>
+	<assert.h>
+
+1551256908 source:c:\users\admin\documents\codeblocks\cpplabs\lab1\main.cpp
+	"main.h"
+	"file.h"
+
+1551249994 source:c:\users\admin\documents\codeblocks\cpplabs\lab1\test.cpp
+
+1551255696 source:c:\users\admin\documents\git_cpp\cpplabs\lab1\file.cpp
+	"file.h"
+
+1551255787 c:\users\admin\documents\git_cpp\cpplabs\lab1\file.h
+	"main.h"
+
+1550673446 c:\users\admin\documents\git_cpp\cpplabs\lab1\main.h
+	<iostream>
+	<fstream>
+	<sstream>
+	<vector>
+	<iterator>
+	<cstring>
+	<algorithm>
+	<stdint.h>
+	<stdlib.h>
+	<stdio.h>
+	<assert.h>
+
+1551256908 source:c:\users\admin\documents\git_cpp\cpplabs\lab1\main.cpp
+	"main.h"
+	"file.h"
+
+1551710729 source:c:\users\aspod\desktop\codeblocks\new\cpplabs\lab1\file.cpp
+	"file.h"
+
+1551710488 c:\users\aspod\desktop\codeblocks\new\cpplabs\lab1\file.h
+	"main.h"
+
+1551711177 c:\users\aspod\desktop\codeblocks\new\cpplabs\lab1\main.h
+	<iostream>
+	<fstream>
+	<sstream>
+	<vector>
+	<iterator>
+	<cstring>
+	<algorithm>
+	<cstdio>
+	<stdint.h>
+	<stdlib.h>
+	<stdio.h>
+	<assert.h>
+
+1551711633 source:c:\users\aspod\desktop\codeblocks\new\cpplabs\lab1\main.cpp
+	"main.h"
+	"file.h"
+

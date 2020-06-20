@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 2.8.2)
+project(libopenmp CXX C)
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+add_library(libopenmp STATIC openmp.cpp openmp.h)
+set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MT")
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /MTd")

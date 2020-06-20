@@ -1,0 +1,8 @@
+cmake_minimum_required(VERSION 2.8.2)
+project(testexec CXX C)
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+add_definitions(-Dgtest_disable_pthreads=ON)
+add_executable(testexec test_main.cpp)
+target_link_libraries(testexec sort)
+target_link_libraries(testexec gtest)
